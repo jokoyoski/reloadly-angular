@@ -1,0 +1,57 @@
+<main class="px-20 pt-10">
+  <a routerLink="/" class="bg-white inline-flex space-x-2 rounded py-2 shadow-md px-4">
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      class="h-6 w-6"
+      fill="none"
+      viewBox="0 0 24 24"
+      stroke="currentColor"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 19l-7-7m0 0l7-7m-7 7h18"
+      />
+    </svg>
+    <span class="">Back</span>
+  </a>
+  <div class="grid gap-10 grid-cols-[1fr,1.5fr] mt-5">
+    <div class="flag"><img class="w-full" src="{{ country?.flags?.['png'] }}" alt="" /></div>
+    <div class="flex flex-col text-xl dark:text-white">
+      <h1 class="text-5xl font-bold h-28">{{ country?.name?.common }}</h1>
+
+      <div class="flex gap-12">
+        <div class="flex flex-col gap-4">
+          <p><span class="font-semibold">Population:</span> {{ country?.population }}</p>
+          <p><span class="font-semibold">Region</span>: {{ country?.region }}</p>
+          <p>
+            <span class="font-semibold">Capital</span>: {{ country?.capital }}
+          </p>
+        </div>
+        <div class="flex flex-col gap-4">
+          <p>
+            <span class="font-semibold">Top Level Domain:</span> {{ country?.tld }}</p>
+          <p>
+            <span class="font-medium">Currencies:</span>
+            {{ getCountryCurrency }}
+          </p>
+          <p>
+            <span class="font-medium">Languages:</span>
+            {{ country?.languages?.nld }}
+          </p>
+        </div>
+      </div>
+      <div class="mt-10">
+        <h5>Border Countries</h5>
+        <p class="flex gap-5 flex-wrap mt-5">
+
+          <span  *ngFor="let country of country?.borders">
+            <a *ngIf="getCountryName(country)" class="px-3 text-sm py-2 shadow-lg dark:bg-gray-700 bg-white " [routerLink]="['/details', getCountryName(country)]">{{getCountryName(country)}}</a>
+          </span>
+
+        </p>
+      </div>
+    </div>
+  </div>
+</main>

@@ -1,0 +1,79 @@
+<section class="mt-8 color-me">
+  <div class="grid grid-cols-2 px-20">
+    <div>
+      <div class="bg-white dark:bg-gray-200 p-3 flex space-x-3 shadow-md">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-6 w-6"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="gray"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+        <input
+          type="text"
+          class="focus:outline-none bg-transparent text-gray-500"
+          placeholder="Search Country Name"
+          [(ngModel)]="filteredString"
+          ng-model="test"
+          (ngModelChange)="changeCountry()"
+        />
+      </div>
+    </div>
+    <div class="flex justify-end">
+      <div class="bg-white dark:bg-gray-200 p-3 shadow-md">
+        <label for=""></label>
+        <select
+          name="regions"
+          id="Select"
+          class="focus:outline-none placeholder:hello dark:bg-gray-200"
+          [(ngModel)]="filteredRegion"
+          (ngModelChange)="changeCountry()"
+        >
+          <option value="region">All Region</option>
+
+          <optgroup
+            class="shadow-md focus:border-none rounded-lg"
+            *ngFor="let r of region"
+          >
+            <option [value]="r">{{ r }}</option>
+          </optgroup>
+        </select>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main class="px-20 mt-10">
+  <div class="grid grid-cols-4 gap-10 grid-flow-row">
+    <a
+    [routerLink]="['/details',country.name.common]"
+      class="bg-white dark:bg-gray-200 h-96 flex flex-col space-x-3 rounded-lg shadow-lg shadow-gray-300"
+      *ngFor="let country of filteredCountryList | filter: filteredString"
+    >
+      <div class="h-1/2 w-full">
+        <img
+          src="{{ country.flags.png }}"
+          alt="country_img"
+          class="w-full h-full rounded-t-lg"
+        />
+      </div>
+
+      <div class="hold-text p-7">
+        <h1 class="font-bold text-xl pb-3">{{ country.name.common }}</h1>
+        <p>
+          <span class="font-semibold">Population</span>:
+          {{ country.population }}
+        </p>
+        <p><span class="font-semibold">Region</span>: {{ country.region }}</p>
+        <p><span class="font-semibold">Capital</span>: {{ country.capital }}</p>
+      </div>
+    </a>
+  </div>
+</main>
